@@ -50,7 +50,7 @@ class Address(object):
 
     @property
     def country(self):
-        return pycountry.countries.get(alpha2=self.country_code)
+        return pycountry.countries.get(alpha_2=self.country_code)
 
     @property
     def country_name(self):
