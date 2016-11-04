@@ -7,12 +7,12 @@ with open('README.rst') as readme_file:
     readme = readme_file.read()
 
 requirements = [
-    'pycountry >= 1.9',
+    'pycountry>=16.10.23rc3',
 ]
 
 setup(
     name='address-formatter',
-    version='0.1.0',
+    version='0.1.1',
     description="""Python module to parse and render postal addresses
         respecting country standard""",
     long_description=readme,
