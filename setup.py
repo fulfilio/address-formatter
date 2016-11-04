@@ -12,7 +12,7 @@ requirements = [
 
 setup(
     name='address-formatter',
-    version='0.1.0',
+    version='0.1.1',
     description="""Python module to parse and render postal addresses
         respecting country standard""",
     long_description=readme,
