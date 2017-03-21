@@ -3,6 +3,12 @@ import pycountry
 from functools import wraps
 
 
+try:
+    bool(type(unicode))
+except NameError:
+    unicode = lambda s: str(s)
+
+
 def upper(value):
     "A safe version of upper"
     if not value:
