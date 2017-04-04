@@ -3,6 +3,12 @@ import pycountry
 from functools import wraps
 
 
+try:
+    bool(type(unicode))
+except NameError:
+    unicode = lambda s: str(s)
+
+
 def upper(value):
     "A safe version of upper"
     if not value:
@@ -78,7 +84,7 @@ class Address(object):
         if hasattr(self, country_renderer):
             parts = getattr(self, country_renderer)()
         else:
-            # no rendered defined for the country.
+            # no renderer defined for the country.
             # Just print it as safely as one could
             parts = [
                 self.name,
@@ -98,6 +104,7 @@ class Address(object):
         "Great Britain"
         return [
             self.name,
+            self.company_name,
             self.join(u' ', self.street, self.street2),
             self.join(u' ', self.county, self.subdivision_name),
             upper(self.city),
@@ -110,6 +117,7 @@ class Address(object):
         "United States"
         return [
             self.name,
+            self.company_name,
             self.join(u' ', self.street, self.street2),
             self.join(
                 u' ', self.city, upper(self.subdivision_code[-2:]),
@@ -127,6 +135,7 @@ class Address(object):
             subdivision = None
         return [
             self.name,
+            self.company_name,
             self.join(u'-', self.street2, self.street),
             self.join(u' ', self.city, subdivision, self.postal_code),
             self.country_name
@@ -137,6 +146,7 @@ class Address(object):
         "France"
         return [
             self.name,
+            self.company_name,
             self.join(u' ', self.street, self.street2),
             self.join(u' ', self.postal_code, upper(self.city)),
             self.country_name
@@ -147,6 +157,7 @@ class Address(object):
         "Germany"
         return [
             self.name,
+            self.company_name,
             self.join(u' ', self.street2, self.street),
             self.join(u' ', self.postal_code, self.city),
             self.country_name
@@ -157,6 +168,7 @@ class Address(object):
         "Australia"
         return [
             self.name,
+            self.company_name,
             self.join(u' ', self.street, self.street2),
             self.join(
                 u' ', upper(self.city), upper(self.subdivision_code),
@@ -170,6 +182,7 @@ class Address(object):
         "Netherlands"
         return [
             self.name,
+            self.company_name,
             self.join(u' ', self.street, self.street2),
             self.join(u' ', self.postal_code, upper(self.city)),
             self.country_name,
@@ -180,6 +193,7 @@ class Address(object):
         "Japan"
         return [
             self.name,
+            self.company_name,
             self.join(u', ', self.street, self.street2),
             self.join(u', ', self.subdivision_name, upper(self.city)),
             self.postal_code,
@@ -191,6 +205,7 @@ class Address(object):
         "Norway"
         return [
             self.name,
+            self.company_name,
             self.join(u' ', self.street, self.street2),
             self.join(u' ', self.postal_code, upper(self.city)),
             self.country_name
